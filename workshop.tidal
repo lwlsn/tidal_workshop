@@ -1,5 +1,16 @@
 -- TidalCycles workshop worksheet
 
+-- Adapted from work by Lucy Cheesman, Richard Eason, Alex McLean, Alexandra Cardenas
+-- CC BY-SA 4.0 - https://creativecommons.org/licenses/by-sa/4.0/
+-- Suggestions and edits/patches welcome
+
+
+-- this is a comment-- nothing will happen when you run it.
+
+
+
+-- TidalCycles workshop worksheet
+
 -- By Lucy Cheesman, Richard Eason, Alex McLean with inspiration
 -- from Alexandra Cardenas
 -- CC BY-SA 4.0 - https://creativecommons.org/licenses/by-sa/4.0/
@@ -38,7 +49,7 @@ d1 $ sound "bd hh sn hh"
 
 -- * Add a silence/rest in a sequence with '~'
 
-d1 $ sound "bd ~ sn:3 bd sn:5 ~ bd:2 sn:2"
+d1 $ sound "bd ~ sn:3 hh"
 
 -- * The longer the sequence, the faster it runs
 
@@ -49,18 +60,19 @@ d1 $ sound "bd bd hh bd sn bd hh bd"
 d2 $ sound "sn [sn:2 sn] bd sn"
 
 -- * Change the global cycles per second (equivalent to BPM)
+-- can use decimals in full tidal, only fractions in web version..
 
-cps 0.6
+setcps (1/6)
 
 -- * Pause everything (remember to put negative numbers in parenthesis)
 
-cps (-1)
+setcps (-1)
 
 -- * Start again
 
-cps 0.6
+setcps (1/2)
 
--- * Hush stops makes everything silent at once
+-- * Hush stops makes everything silent at once.
 
 hush
 
@@ -80,18 +92,24 @@ d1 $ sound "bd hh sn:1 hh sn:1 hh" # gain "1 0.7 0.5"
 
 -- 'sine1' is a continuous pattern following a sine curve from 0 to 1 and back
 
-d1 $ sound "bd*32" # gain sine1
+d1 $ sound "bd*32" # gain sine
 
 -- ** 'speed' and up
 
--- speed of playback, e.g. 2 = up an octave
+-- change the speed the sample is played back at.
 d1 $ speed "1 2 4" # sound "jungbass:6"
+
+-- a little bit of music theory needed here.
+
+-- 1 octave = 12 semitones (i.e. 12 keys on piano, white/black)
+-- 1 octave = 2 x frequency.
 
 -- up - semitones, e.g. 12 = up an octave
 d1 $ up "0 ~ 12 24" # sound "jungbass:6"
 
 d1 $ sound "numbers:1 numbers:2 numbers:3 numbers:4"
 
+-- octave as speed, notes are twice as fast for one octave.
 d1 $ sound "numbers:1 numbers:2 numbers:3 numbers:4" # speed "1 1.5 2 0.5"
 
 -- ** pan - 0 = left, 0.5 = middle, 1 = right
@@ -100,7 +118,7 @@ d1 $ sound "numbers:1 numbers:2 numbers:3 numbers:4" # pan "0 0.5 1"
 -- We can use * to repeat a step, e.g. this plays 16 kick drums per cycle,
 -- panned from left to right following a sine curve, pitched right up:
 
-d1 $ sound "drum*16" # pan sine1 # speed "4"
+d1 $ sound "drum*16" # pan sine # speed "4"
 
 -- ** shape - distortion (careful - also makes the sound much louder)
 
